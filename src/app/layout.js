@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,8 +10,38 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+  <html lang="en">
+    <body className={inter.className}>
+      <div className="container">  {/* Added container here */}
+        <header>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href="/">My Blog</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/profile">Profile</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/about">About</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/login">Login</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+        <section>
+          {children}
+        </section>
+      </div>  {/* Container ends here */}
+    </body>
+  </html>
+);
 }
