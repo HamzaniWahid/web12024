@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 function Login() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,6 +36,7 @@ function Login() {
             type="password"
             className="form-control"
             id="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button type="submit" className="btn btn-primary">Login</button>
