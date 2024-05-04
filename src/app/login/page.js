@@ -1,25 +1,37 @@
 'use client'
-import Head from 'next/head';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [jumlah, setJumlah] = useState(3)
+  const router = useRouter()
 
   const handleLogin = async (e) => {
+    let nilaiJumlah = jumlah;
     e.preventDefault();
-    // Lakukan validasi formulir di sini jika diperlukan
-
-    // Contoh: Validasi bahwa email dan password tidak kosong
-    if (!email || !password) {
+    if (nilaiJumlah == 0) {
+      alert('Anda sudah tidak berhak, silahkan tunggu 1 jam');
+      return;
+    }
+    else if (!email || !password) {
       alert('Please enter email and password');
       return;
+    } else if (email != 'admin@gmail.com' || password != '123') {
+      nilaiJumlah = nilaiJumlah - 1;
+      setJumlah(nilaiJumlah);
+      alert('Email atau password salah');
+      return;
+    } else {
+      router.push('/dashboard')
     }
   }
 
   return (
     <div className="container">
-      <h1 className="mt-5">{email}</h1>
+      <p>Login Maksimal adalah  {jumlah}</p>
+      <h1 className="mt-5">Halaman Login</h1>
       <form onSubmit={handleLogin} className="mt-3">
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email:</label>
