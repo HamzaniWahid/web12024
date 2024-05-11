@@ -1,14 +1,19 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
+import { login } from  '@/slices/loginSlice';
+import { useDispatch }   from 'react-redux';
+
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [jumlah, setJumlah] = useState(3)
   const router = useRouter()
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
+    dispatch(login());
     let nilaiJumlah = jumlah;
     e.preventDefault();
     if (nilaiJumlah == 0) {
@@ -24,7 +29,8 @@ function Login() {
       alert('Email atau password salah');
       return;
     } else {
-      router.push('/dashboard')
+      dispatch(login);
+      // router.push('/dashboard')
     }
   }
 
