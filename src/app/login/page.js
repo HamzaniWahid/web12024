@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
 import { login } from  '@/slices/loginSlice';
-import { useDispatch }   from 'react-redux';
+import { useSelector, useDispatch }   from 'react-redux';
 
 
 function Login() {
@@ -11,34 +11,19 @@ function Login() {
   const [jumlah, setJumlah] = useState(3)
   const router = useRouter()
   const dispatch = useDispatch();
+  const errorMessage = useSelector(state => state.login.errorMessage);
+  
 
   const handleLogin = async (e) => {
-    dispatch(login());
-    let nilaiJumlah = jumlah;
-    e.preventDefault();
-    if (nilaiJumlah == 0) {
-      alert('Anda sudah tidak berhak, silahkan tunggu 1 jam');
-      return;
-    }
-    else if (!email || !password) {
-      alert('Please enter email and password');
-      return;
-    } else if (email != 'admin@gmail.com' || password != '123') {
-      nilaiJumlah = nilaiJumlah - 1;
-      setJumlah(nilaiJumlah);
-      alert('Email atau password salah');
-      return;
-    } else {
-      dispatch(login);
-      // router.push('/dashboard')
-    }
+    dispatch(login({"username": email, "password": password}));
   }
 
   return (
     <div className="container">
+      {errorMessage}
       <p>Login Maksimal adalah  {jumlah}</p>
       <h1 className="mt-5">Halaman Login</h1>
-      <form onSubmit={handleLogin} className="mt-3">
+      <form className="mt-3">
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email:</label>
           <input
@@ -57,7 +42,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Login</button>
+        <button type="button" onClick={handleLogin} className="btn btn-primary">Login</button>
       </form>
     </div>
   );

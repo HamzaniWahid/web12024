@@ -1,17 +1,27 @@
 // slices/counterSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const loginSlice = createSlice({
-  name: 'login',
+  name: "login",
   initialState: {
     username: "",
-    isLogin: false
+    error: false,
+    errorMessage: "",
+    isLogin: false,
   },
   reducers: {
-    login: state => {
-      console.log("dispatch berhasil");
-      state.username = "Admin";
-      state.isLogin = true;
+    login: (state, actions) => {
+      let email = actions.payload.username;
+      let password = actions.payload.password;
+      if (!email || !password) {
+        state.errorMessage = "Please enter email and password";
+        return;
+      } else if (email != "admin@getsurvey.id" || password != "123") {
+        state.errorMessage = "Email atau password salah";
+      } else {
+        state.username = actions.payload.username;
+        state.isLogin = true;
+      }
     },
   },
 });
