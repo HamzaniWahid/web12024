@@ -15,6 +15,7 @@ function Login() {
   
 
   const handleLogin = async (e) => {
+    e.preventDefault();
     dispatch(login({"username": email, "password": password}));
   }
 
@@ -23,7 +24,7 @@ function Login() {
       {errorMessage}
       <p>Login Maksimal adalah  {jumlah}</p>
       <h1 className="mt-5">Halaman Login</h1>
-      <form className="mt-3">
+      <form onSubmit={handleLogin}  className="mt-3">
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email:</label>
           <input
@@ -42,7 +43,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="button" onClick={handleLogin} className="btn btn-primary">Login</button>
+        <button type="submit" className="btn btn-primary">Login</button>
       </form>
     </div>
   );
