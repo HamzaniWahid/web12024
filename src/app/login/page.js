@@ -12,6 +12,7 @@ function Login() {
   const router = useRouter()
   const dispatch = useDispatch();
   const errorMessage = useSelector(state => state.login.errorMessage);
+  const success = useSelector(state => state.login.isLogin);
   
 
   const handleLogin = async (e) => {
@@ -20,6 +21,7 @@ function Login() {
   }
 
   return (
+    success ? router.push('/dashboard') :
     <div className="container">
       {errorMessage}
       <p>Login Maksimal adalah  {jumlah}</p>

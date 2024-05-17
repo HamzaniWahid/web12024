@@ -1,8 +1,10 @@
+
 import { Inter } from "next/font/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Providers } from './providers';
 const inter = Inter({ subsets: ["latin"] });
+import Navigation from "@/components/Navigations";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,17 +13,7 @@ export const metadata = {
 
 
 // Sub-komponen untuk bagian navigasi
-function Navigation() {
-  return (
-    <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/dashboard">Dashboard</a>
-      <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/profile">Profile</a>
-      <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">About</a>
-      <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/counter">Counter</a>
-      <a className="py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
-    </nav>
-  );
-}
+
 
 
 // Komponen induk untuk header
@@ -45,14 +37,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+      <Providers>
         <div className="container">  {/* Added container here */}
           <Header></Header>
           <section>
-            <Providers>
               {children}
-            </Providers>
           </section>
         </div>  {/* Container ends here */}
+        </Providers>
       </body>
     </html>
   );
