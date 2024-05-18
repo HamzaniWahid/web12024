@@ -18,7 +18,8 @@ function Navigation() {
       <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">About</a>
       <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/counter">Counter</a>
       {isLogout ?   
-      <a className="py-2 link-body-emphasis text-decoration-none" onClick={logoutClick} >Logut</a> : <a className="py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>}
+      <a className="py-2 link-body-emphasis text-decoration-none" onClick={logoutClick} >Logut</a> 
+      : <a className="py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>}
     </nav>
   );
 }

@@ -1,33 +1,41 @@
 // slices/counterSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const login = createAsyncThunk('login/fetchTodos', async (data) => {
+  const response = await axios.post('http://103.171.84.215:9090/webhook/login', data)
+  return response.todos
+})
 
 const loginSlice = createSlice({
   name: "login",
   initialState: {
     username: "",
+    status: "",
     error: false,
     errorMessage: "",
     isLogin: false,
   },
   reducers: {
-    login: (state, actions) => {
-      let email = actions.payload.username;
-      let password = actions.payload.password;
-      if (!email || !password) {
-        state.errorMessage = "Please enter email and password";
-        return;
-      } else if (email != "admin@getsurvey.id" || password != "123") {
-        state.errorMessage = "Email atau password salah";
-      } else {
-        state.username = actions.payload.username;
-        state.isLogin = true;
-      }
-    },
     logout: (state, actions) => {
       state.isLogin = false;
-    }
+    },
+
   },
+  extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.isLogin = true;
+      state.contents = action.payload
+    })
+    builder.addCase(login.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+    });
+  }
 });
 
-export const { login, logout } = loginSlice.actions;
+export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;
