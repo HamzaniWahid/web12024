@@ -1,7 +1,8 @@
-'use client'
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMahasiswa } from '@/slices/mahasiswaSlice';
+"use client";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMahasiswa } from "@/slices/mahasiswaSlice";
+import Link from "next/link";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -9,23 +10,52 @@ export default function Home() {
   const mahasiswaStatus = useSelector((state) => state.mahasiswa.status);
 
   useEffect(() => {
-    if (mahasiswaStatus === 'idle') {
+    if (mahasiswaStatus === "idle") {
       dispatch(fetchMahasiswa());
     }
   }, [mahasiswaStatus, dispatch]);
 
+  const handleDelete = async (id) => {
+    // Implement delete logic here
+  };
+
   return (
-    <div>
+    <div className="container mt-5">
       <h1>Daftar Mahasiswa</h1>
-      {mahasiswaStatus === 'loading' && <p>Loading...</p>}
-      {mahasiswaStatus === 'succeeded' && (
-        <ul>
-          {mahasiswa.map((mhs) => (
-            <li key={mhs.id}>{mhs.nama} - {mhs.nim} - {mhs.jurusan}</li>
-          ))}
-        </ul>
+      <Link href="/mahasiswa/tambah">Tambah Mahasiswa</Link>
+      {mahasiswaStatus === "loading" && <p>Loading...</p>}
+      {mahasiswaStatus === "succeeded" && (
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Nama</th>
+              <th scope="col">NIM</th>
+              <th scope="col">Jurusan</th>
+              <th scope="col">Aksi</th> {/* Tambah kolom Aksi */}
+            </tr>
+          </thead>
+          <tbody>
+            {mahasiswa.map((mhs) => (
+              <tr key={mhs.id}>
+                <td>{mhs.nama}</td>
+                <td>{mhs.nim}</td>
+                <td>{mhs.jurusan}</td>
+                <td>
+                  <Link href={`mahasiswa/${mhs.id}/ubah`}>Edit</Link> &nbsp;
+                  &nbsp;
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(mhs.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
-      {mahasiswaStatus === 'failed' && <p>Error loading data...</p>}
+      {mahasiswaStatus === "failed" && <p>Error loading data...</p>}
     </div>
   );
 }
