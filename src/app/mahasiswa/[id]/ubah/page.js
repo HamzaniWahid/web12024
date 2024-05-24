@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMahasiswaById, updateMahasiswa } from "@/slices/mahasiswaSlice";
+import { fetchMahasiswaById, updateMahasiswa, fetchMahasiswa } from "@/slices/mahasiswaSlice";
 
 export default function UbahMahasiswa({ params }) {
   const [nama, setNama] = useState("");
@@ -38,7 +38,8 @@ export default function UbahMahasiswa({ params }) {
       nim,
       jurusan,
     };
-    dispatch(updateMahasiswa(updatedData));
+    await dispatch(updateMahasiswa(updatedData));
+    await dispatch(fetchMahasiswa());
     router.push("/mahasiswa");
   };
 

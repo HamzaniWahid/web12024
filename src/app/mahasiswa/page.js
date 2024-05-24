@@ -1,13 +1,16 @@
 "use client";
 import { useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMahasiswa } from "@/slices/mahasiswaSlice";
+import { fetchMahasiswa, deleteMahasiswa } from "@/slices/mahasiswaSlice";
 import Link from "next/link";
+
 
 export default function Home() {
   const dispatch = useDispatch();
   const mahasiswa = useSelector((state) => state.mahasiswa.data);
   const mahasiswaStatus = useSelector((state) => state.mahasiswa.status);
+  const router = useRouter();
 
   useEffect(() => {
     if (mahasiswaStatus === "idle") {
@@ -16,7 +19,8 @@ export default function Home() {
   }, [mahasiswaStatus, dispatch]);
 
   const handleDelete = async (id) => {
-    // Implement delete logic here
+    await dispatch(deleteMahasiswa(id));
+    dispatch(fetchMahasiswa());
   };
 
   return (

@@ -41,6 +41,14 @@ export const updateMahasiswa = createAsyncThunk(
   }
 );
 
+export const deleteMahasiswa = createAsyncThunk(
+  "mahasiswa/deleteMahasiswa",
+  async (id) => {
+    const response = await axios.delete(`/api/mahasiswa/${id}`);
+    return response.data;
+  }
+);
+
 const mahasiswaSlice = createSlice({
   name: "mahasiswa",
   initialState: {
