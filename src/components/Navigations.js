@@ -14,6 +14,7 @@ function Navigation() {
   return (
     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
       <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/dashboard">Dashboard</a>
+      <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/mahasiswa">Mahasiswa</a>
       <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/profile">Profile</a>
       <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">About</a>
       <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="/counter">Counter</a>
