@@ -28,6 +28,7 @@ model User {
   nama      String
   username  String   @unique
   email     String
+  password     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
