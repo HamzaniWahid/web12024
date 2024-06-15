@@ -28,9 +28,9 @@ function Login() {
       <h1 className="mt-5">Halaman Login</h1>
       <form onSubmit={handleLogin}  className="mt-3">
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email:</label>
+          <label htmlFor="email" className="form-label">Username:</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="email"
             onChange={(e) => setEmail(e.target.value)}

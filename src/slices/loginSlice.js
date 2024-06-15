@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const login = createAsyncThunk('login/fetchTodos', async (data) => {
-  const response = await axios.post('http://103.171.84.215:9090/webhook/login', data)
+  const response = await axios.post('/api/user/login', data)
   return response.todos
 })
 
