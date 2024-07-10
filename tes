@@ -1,0 +1,15 @@
+Redux: adalah
+
+Store
+
+State
+
+Action
+
+
+
+Database -> Prisma -> API -> slice (store) -> app (page) ||| get Database - dari database
+
+App(page) -> Slice -> API -> Prisma     -> Database ||| post ke datatbase - ke database
+not found -> Nothing      -> model data -> tabel
+
